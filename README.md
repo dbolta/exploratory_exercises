@@ -2,7 +2,7 @@
 A collection of exploratory data analyses
 
 ## 2016 Presidential Votes & Taxes
-Analaysis of voting results in the 2016 presidential election vs. state populations, tax payments, and federal subsidies received.
+An analysis of voting results in the 2016 presidential election vs. state populations, tax payments, and federal subsidies received.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/2016_presidential_votes_vs_taxes.ipynb
 
 ## Hot Ones Spice Graphs
