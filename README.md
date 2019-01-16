@@ -15,5 +15,6 @@ Utilizing Data.World's Monday Makeover mortage and earnings data with Kaiser Fam
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Hours%20to%20Pay%20Hospital%20Visit.ipynb
 
 ## Python
-### Predict sine wave using LSTM and GRU in keras
+### LSTM vs GRU in keras
+Predict sine wave using window function, then compare which RNN is more accurate.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
