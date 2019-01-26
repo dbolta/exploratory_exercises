@@ -1,0 +1,529 @@
+---
+output:
+  pdf_document: default
+---
+
+# Nate Silver 538 Masculinity Survey
+538.com published an article on masculinty based on a survey they took with WNYC Studios.
+<br>Since most of the article focuses on visualization (and they were kind enough to make the data available), I wanted to take a look and see what trends might come out through ML-based analytics.
+
+https://fivethirtyeight.com/features/what-do-men-think-it-means-to-be-a-man/
+
+### The workflow I used can be broken up into 3 sections:
+### 1. Data wrangling
+### 2. Unsupervised analysis using kmeans
+### 3. Supervised analysis: What variables drive an idea (or lack of) masculinity?
+
+# Section 1: Setup and Data Import
+```{r results=FALSE, message=FALSE, echo=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo=FALSE, warning=FALSE, message=FALSE)
+
+library(tidyverse)
+library(rlang)
+library(caret)
+library(recipes)
+library(ggfortify)
+library(ranger)
+```
+
+#### Load data
+https://data.fivethirtyeight.com/
+```{r message=FALSE, warning=FALSE}
+input_1 = read_csv("C:/Users/db1/Documents/R/538_man_survey/raw-responses.csv") %>% 
+  select(-1, -StartDate, -EndDate)
+data_1 = input_1
+```
+
+#### Review unique responses on questions
+#### Get some idea of where to start cleanup
+```{r}
+data_1 %>% 
+  select(2) %>% 
+  group_by_at(names(.)) %>% 
+  summarise(n = n())
+```
+
+#### Change "No answer" to NA across dataframe
+```{r}
+data_1 = data_1 %>% 
+  mutate_all(function(x){
+    ifelse(x == "No answer", NA, x)
+  })
+
+data_1 %>% 
+  select(2) %>% 
+  group_by_at(names(.)) %>% 
+  summarise(n = n())
+```
+
+#### Change "Not selected" to 0 in one-hot columns
+```{r}
+which_dummy = map_lgl(data_1 %>% 
+             colnames(),
+           function(i){
+            data_1 %>%
+              select(i) %>% 
+               paste() %>% 
+              str_detect("Not selected")
+          }) %>% 
+  which()
+
+data_dummy = data_1 %>% 
+  select(which_dummy) %>% 
+  mutate_all(function(x){
+    ifelse(x == "Not selected", 0, 1)
+  })
+
+
+data_1 = data_1 %>% 
+  select(-which_dummy) %>% 
+  bind_cols(data_dummy) %>% 
+  select(names(data_1))
+
+data_1 %>% 
+  select(1:5) %>% 
+  slice(1:5)
+```
+
+#### Encode ordinal columns
+#### Function to encode ordinal columns
+```{r}
+convert_ordinal_string_column = function(input_data_frame,
+                                         column_detection_string,
+                                         LHS_strings = NULL, RHS = NULL){
+which_ordinal = map_lgl(input_data_frame %>% 
+             colnames(),
+           function(i){
+            data_1 %>%
+              select(i) %>% 
+               paste() %>% 
+              str_detect(column_detection_string)
+          }) %>% 
+  which()
+
+data_ordinal = input_data_frame %>%
+    select(which_ordinal)
+  for (i in 1:length(LHS_strings)) {
+    data_ordinal = data_ordinal %>% 
+    mutate_all(function(x){
+      ifelse(str_detect(x, LHS_strings[i]), RHS[i], x)
+    }
+    )
+  }
+data_ordinal = data_ordinal %>%
+    mutate_all(function(x){
+      ifelse(x %in% RHS, x, NA)
+    })
+
+input_data_frame = input_data_frame %>% 
+  select(-which_ordinal) %>% 
+  bind_cols(data_ordinal) %>% 
+  select(names(input_data_frame))
+
+return(input_data_frame)
+
+}
+```
+#### Call function to encode ordinal columns on individual questions
+```{r}
+# q0001, q0002
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Somewhat",
+                                LHS_strings = c("Very", 
+                                                "Somewhat", 
+                                                "Not at all",
+                                                "Not very",
+                                                "Not too"), 
+                                RHS = c(4, 3, 1, 2, 2))
+
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("\\$0",
+                                LHS_strings = c("\\$0",
+                                                "\\$10,",
+                                                "\\$25,",
+                                                "\\$50,",
+                                                "\\$75,",
+                                                "\\$100,",
+                                                "\\$125,",
+                                                "\\$150,",
+                                                "\\$175,",
+                                                "\\$200,",
+                                                "Prefer "), 
+                                RHS = c(5, 17.5, 37.5, 62.5, 87.5, 112.5, 
+                                        137.5, 162.5, 187.5, 225, NA))
+
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Yes",
+                                LHS_strings = c("Yes",
+                                                "No"), 
+                                RHS = c(1, 0))
+
+# q0007
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Never, but open to it",
+                                LHS_strings = c("Often",
+                                                "Rarely",
+                                                "Sometimes",
+                                                "Never, but open to it",
+                                                "Never, and not open to it"), 
+                                RHS = c(5, 4, 3, 2, 1))
+
+# q0009
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Not employed, NOT looking for work",
+                                LHS_strings = c("Not employed, NOT looking for work",
+                                                "Not employed, looking for work",
+                                                "Employed, working part-time",
+                                                "Not employed, student",
+                                                "Not employed-retired",
+                                                "Employed, working full-time"), 
+                                RHS = c(5, 4, 3, 2, 1, 0))
+
+# q0014
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Nothing at all",
+                                LHS_strings = c("A lot",
+                                                "Some",
+                                                "Only a little",
+                                                "Nothing at all"), 
+                                RHS = c(3, 2, 1, 0))
+
+# q0018
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Sometimes",
+                                LHS_strings = c("Always",
+                                                "Often",
+                                                "Sometimes",
+                                                "Rarely",
+                                                "Never"), 
+                                RHS = c(4, 3, 2, 1, 0))
+
+# q0024
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Never married",
+                                LHS_strings = c("Married",
+                                                "Widowed",
+                                                "Never married",
+                                                "Separated",
+                                                "Divorced"), 
+                                RHS = c(2, 1, 0, -1, -2))
+
+# q0026
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Bisexual",
+                                LHS_strings = c("Straight",
+                                                "Bisexual",
+                                                "Gay",
+                                                "Other"), 
+                                RHS = c(3, 2, 1, 0))
+
+# q0029
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Associate's degree",
+                                LHS_strings = c("Post graduate degree",
+                                                "College graduate",
+                                                "Associate's degree",
+                                                "Some college",
+                                                "High school or G.E.D.",
+                                                "Did not complete high school"), 
+                                RHS = c(5, 4, 3, 2, 1, 0))
+
+# race2
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Non-white",
+                                LHS_strings = c("Non-white",
+                                                "White"), 
+                                RHS = c(0, 1))
+
+# educ4
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Post graduate degree",
+                                LHS_strings = c("Post graduate degree",
+                                                "College or more",
+                                                "Some college",
+                                                "High school or less"), 
+                                RHS = c(3, 2, 1))
+
+# educ3
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("High school or less",
+                                LHS_strings = c("College or more",
+                                                "Some college",
+                                                "High school or less"), 
+                                RHS = c(3, 2, 1))
+
+# age3
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("35 - 64",
+                                LHS_strings = c("18 - 34",
+                                                "35 - 64",
+                                                "65 and up"), 
+                                RHS = c(26, 49.5, 72))
+
+# kids
+data_1 = data_1 %>% 
+  convert_ordinal_string_column("Has children",
+                                LHS_strings = c("Has children",
+                                                "No children"), 
+                                RHS = c(1, 0))
+
+data_1 %>% 
+  slice(1:5) %>% 
+  select(1:5)
+```
+
+#### Encode remaining dummy columns
+```{r results=FALSE, warning=FALSE}
+# Remove space cause one-hot will become column names
+data_1 = data_1 %>% 
+  mutate_all(function(x){
+    str_replace_all(x, " ", "_")
+  }) %>% 
+  mutate_all(function(x){
+    str_replace_all(x, "_/_", "_")
+  })
+
+one_hot_cols = c("q0013", "q0028", "q0030", "q0035", "q0036", "racethn4")
+data_2 = data_1 %>% 
+  select(one_hot_cols)
+
+data_2 = recipe(~ ., data = data_2) %>% 
+  step_dummy(!!! one_hot_cols, one_hot = TRUE) %>% 
+  prep(training = data_2) %>% 
+  bake(new_data = data_2) %>% 
+  bind_cols(data_1) %>% 
+  select(-one_hot_cols) %>% 
+  mutate_all(function(x) as.double(x))
+```
+```{r}
+data_2 %>% 
+  slice(1:5) %>% 
+  select(1:5)
+```
+
+#### Impute NA's using missRanger
+```{r}
+data_3_impute = data_2 %>%
+  missRanger::missRanger(pmm.k = 10, seed = 12345)
+
+data_3_impute %>% 
+  slice(1:5) %>% 
+  select(1:5)
+
+```
+
+#### Center_scale, don't change weightings column
+#### Weightings column is meant to weight the responses to US demographics.
+```{r}
+data_4_scaled = data_3_impute %>% 
+  recipe() %>% 
+  update_role(everything(),
+              new_role = "predictor") %>% 
+  update_role(weight, new_role = "weights") %>% 
+  step_center(all_predictors()) %>% 
+  step_scale(all_predictors()) %>% 
+  prep(training = data_3_impute) %>% 
+  bake(new_data = data_3_impute)
+```
+
+
+# 2. Unsupervised clustering with kmeans
+#### Prepare data: resample rows by the US demographic weightings.
+```{r}
+data_4_scaled = data_4_scaled %>% 
+  mutate(weight = round(weight / min(weight)))
+
+sample_freqs = data_4_scaled$weight
+
+# drop the weight column before resampling to reduce memory
+data_4_scaled = data_4_scaled %>% 
+  select(-weight)
+
+sample_index = 1:length(sample_freqs) %>% 
+  map(function(i){
+    rep(i, sample_freqs[i])
+  }) %>% 
+  unlist()
+
+data_5_for_clust = data_4_scaled %>% 
+  slice(sample_index)
+```
+
+#### Kmeans clustering
+#### Determine best number of clusters 
+https://uc-r.github.io/kmeans_clustering
+
+```{r}
+wss = function(df, k) {
+  kmeans(df, k, nstart = 25)$tot.withinss
+}
+
+num_clusters = 1:15
+
+set.seed(12345)
+wss_values = num_clusters %>%
+  map_dbl(wss, df = data_5_for_clust)
+
+wss_results = tibble(num_clusters = num_clusters, wss_values = wss_values) %>%
+  mutate(wss_lag = lag(wss_values)) %>% 
+  mutate(delta_wss = abs(wss_values - wss_lag))
+
+wss_results %>% 
+  ggplot(aes(x = num_clusters, y = wss_values)) +
+  geom_point() +
+  geom_line()
+
+wss_results %>% 
+  na.omit() %>% 
+  ggplot(aes(x = num_clusters, y = delta_wss)) +
+  geom_point() +
+  geom_line()
+```
+
+#### Cluster data by 5 clusters and visualize
+#### Determine distinctive features
+https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html
+
+
+```{r}
+set.seed(12345)
+final_kmeans = data_5_for_clust %>%
+  kmeans(5, nstart = 25)
+
+data_6_results = data_5_for_clust %>%
+  mutate(Cluster = final_kmeans$cluster) %>%
+  distinct()
+
+pca_results = prcomp(data_6_results %>% 
+                  select(-Cluster),
+       center = FALSE, scale. = FALSE)
+
+autoplot(pca_results, 
+         data = data_6_results %>% 
+           mutate(Cluster = factor(Cluster)), colour = 'Cluster',
+         ) +
+  ggtitle("Clusters mapped to PC1, PC2")
+
+autoplot(pca_results, 
+         data = data_6_results %>% 
+           mutate(Cluster = factor(Cluster)), colour = 'Cluster',
+         loadings = TRUE, loadings.colour = 'blue',
+         loadings.label = TRUE, loadings.label.size = 3
+         ) +
+  ggtitle("Feature Loadings on PC1, PC2")
+```
+
+#### Graphs are a little hard to read but 
+#### Trend is observed between low-PC1/hi-PC2 :: hi-PC1/low-PC2
+
+#### Determine the questions driving the features
+```{r}
+pca_results$rotation %>%
+  as_tibble() %>% 
+  select(PC1, PC2) %>% 
+  mutate(cols = names(data_5_for_clust)) %>% 
+  mutate(distance = sqrt(PC1^2 + PC2^2)) %>% 
+  arrange(desc(distance))
+```
+#### So just from an unsupervised perspective, the largest breaks in the survey population (reweighted to US demographics) are race and education level.
+#### The biggest respondents group appear to be highly educated, non-minority.
+
+
+# Supervised learning: Predicting what does masculinity look like?
+#### Set target variable: "How masculine are you?"
+#### Remove other questions essentially re-asking the same question.
+#### Random forest model will provide feature importances.
+```{r results=FALSE}
+### Remove other questions synonymous with masculinity
+data_7_for_regress = data_5_for_clust %>% 
+  select(-contains("q0002"),
+         -contains("q0004"),
+         -contains("q0005"),
+         -contains("educ"))
+
+masculin_model = ranger(data = data_7_for_regress
+                        , q0001~.
+                        #, dependent.variable.name = "q0001"
+                        , save.memory = TRUE
+                        , importance = 'permutation')
+
+masc_model_importance = importance_pvalues(masculin_model
+                                           , method = "altmann"
+                                           , data = data_7_for_regress
+                                           , formula = q0001~.
+                                           , num.permutations = 100
+                                           )
+```
+```{r}
+masc_model_importance %>% 
+  as.data.frame() %>% 
+  mutate(query = row.names(.)) %>% 
+  arrange(desc(importance)) %>% 
+  slice(1:10)
+```
+
+#### Create partial dependency plots for the top 10 variables.
+https://bgreenwell.github.io/pdp/articles/pdp.html
+
+
+```{r message=FALSE}
+library(pdp)
+
+top_columns = masc_model_importance %>% 
+  as.data.frame() %>% 
+  mutate(query = row.names(.)) %>% 
+  arrange(desc(importance)) %>% 
+  slice(1:10) %>% 
+  select(query) %>% 
+  unlist()
+
+top_columns_translated = 
+  c("7_6. Have relations with women",
+    "18. Try to pay when on a date", 
+    "7_8. Watch sports", "7_11. Feel lonely",
+    "7_7. Have relations with men", 
+    "29. Highest grade school completed", 
+    "8_3. Your hair or hairline", 
+    "7_5. Physically fight someone", 
+    "20_4. How gauge interest intimacy? Every situation different.",
+    "34. Salary demographic")
+
+wrapper <- function(x, ...) 
+{
+  paste(strwrap(x, ...), collapse = "\n")
+}
+
+pdp_graphs = map(1:length(top_columns),
+                 function(pred_var_num){
+                   masculin_model %>%
+                     pdp::partial(pred.var = top_columns[pred_var_num]) %>%
+                     autoplot(rug = TRUE,
+                              train = data_7_for_regress) +
+                     theme_light() +
+                     ggtitle(wrapper(top_columns_translated[pred_var_num],
+                                     width = 20))
+                   })
+
+grid.arrange(grobs = pdp_graphs[1:6], ncol = 3)
+grid.arrange(grobs = pdp_graphs[7:10], ncol = 3)
+```
+
+
+#### Questions, by importance:
+#### 7_6. Have relations with women
+#### 18. Try to pay when on a date
+#### 7_8. Watch sports
+#### 7_11. Feel lonely
+#### 7_7. Have relations with men
+#### 29. Highest grade school completed
+#### 8_3. Your hair or hairline
+#### 7_5. Physically fight someone
+#### 20_4. How do you gauge someone's interest in intimacy? Every situation different.
+#### 34. Salary demographic
+
+#### Consider the shapes of the respones. Yes, more masculine men have more sexual relations with women, but compare which questions show a fairly linear response vs. other patterns.
+#### For instance, any level of sexual contact with other men results in a complete lack of masculine identity.
+#### Surprisingly: A moderate sports watching only results in moderate masculinity. I would have expected masculinity to increase faster with sports watching, similar to the physical fighting response.
+#### Masculine men also admit to some level of loneliness.
+#### Masculinity seems to require a moderate level of education. However, all but the lowest level of salary earnings feel masculine.
