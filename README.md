@@ -14,6 +14,11 @@ A trellised visualization to determine how much of a shock each proceeding sauce
 Utilizing Data.World's Monday Makeover mortage and earnings data with Kaiser Family Foundation data on Medical Costs
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Hours%20to%20Pay%20Hospital%20Visit.ipynb
 
+### What does it mean to be masculine?
+Analysis if Nate Silver 538.com masculinity survey data
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
+
 ## Python
 ### LSTM vs GRU in keras
 Predict sine wave using window function, then compare which RNN is more accurate.
