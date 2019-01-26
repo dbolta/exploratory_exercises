@@ -17,7 +17,7 @@ Utilizing Data.World's Monday Makeover mortage and earnings data with Kaiser Fam
 ### What does it mean to be masculine?
 Analysis if Nate Silver 538.com masculinity survey data
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
-<br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.Rmd
 
 ## Python
 ### LSTM vs GRU in keras
