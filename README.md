@@ -23,3 +23,7 @@ Analysis if Nate Silver 538.com masculinity survey data
 ### LSTM vs GRU in keras
 Predict sine wave using window function, then compare which RNN is more accurate.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
+
+### Neural nets from scratch with numpy
+4 neural nets from scratch: 2 layers with relu, add 3rd layer, add bias term, use sigmoid activation 
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/numpy_nnet_1.ipynb
