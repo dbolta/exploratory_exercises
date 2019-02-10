@@ -25,5 +25,9 @@ Predict sine wave using window function, then compare which RNN is more accurate
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
 
 ### Neural nets from scratch with numpy
-4 neural nets from scratch: 2 layers with relu, add 3rd layer, add bias term, use sigmoid activation 
+4 neural nets from scratch: 
+<br>1. Multilayer with relu activation
+<br>2. #1 with additional hidden layer
+<br>3. #2 with bias
+<br>4. #3 sub sigmoid activation 
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/numpy_nnet_1.ipynb
