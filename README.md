@@ -31,3 +31,7 @@ Predict sine wave using window function, then compare which RNN is more accurate
 <br>3. #2 with bias
 <br>4. #3 sub sigmoid activation 
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/numpy_nnet_1.ipynb
+
+### Neural nets with pytorch
+Deep learning with weight perturbation between epochs
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/pytorch_practice_1.ipynb
