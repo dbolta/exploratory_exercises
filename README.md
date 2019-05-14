@@ -21,7 +21,7 @@ Analysis if Nate Silver 538.com masculinity survey data
 
 ## Python
 ### Baby weight Bayes
-Estimate of baby's weight base on WHO growth chart (prior) and measurements at doctor (likelihood)
+Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20weight%20bayes%201.ipynb
 
 ### LSTM vs GRU in keras
