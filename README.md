@@ -25,7 +25,7 @@ Bayes and MCMC probability distribution of baby's weight via WHO growth chart (p
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20weight%20bayes%201.ipynb
 
 ### Galveston Bay water readings around Hurricane Harvey
-<br>https://github.com/dbolta/exploratory_exercises
+https://github.com/dbolta/exploratory_exercises
 
 ### LSTM vs GRU in keras
 Predict sine wave using window function, then compare which RNN is more accurate.
