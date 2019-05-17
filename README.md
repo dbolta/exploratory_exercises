@@ -24,6 +24,9 @@ Analysis if Nate Silver 538.com masculinity survey data
 Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20weight%20bayes%201.ipynb
 
+### Galveston Bay water readings around Hurricane Harvey
+<br>https://github.com/dbolta/exploratory_exercises
+
 ### LSTM vs GRU in keras
 Predict sine wave using window function, then compare which RNN is more accurate.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
