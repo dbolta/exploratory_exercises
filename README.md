@@ -43,3 +43,12 @@ __Neural nets from scratch with numpy__
 __Neural nets with pytorch__
 <br>Deep learning with weight perturbation between epochs
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/pytorch_practice_1.ipynb
+
+__Probability Examples__
+<br>Originally inspired by Probability, chapter 5 of Intro to Algorithms
+<br>1. Birthday paradox
+<br>2. Coupon collector's problem
+<br>3. Poisson and exponential events probabilities
+<br>4. Goodness of fit: chi-squared and k-s tests
+<br>5. Jeep problem
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Probability%20Examples.ipynb
