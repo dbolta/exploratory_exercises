@@ -44,6 +44,10 @@ __Neural nets with pytorch__
 <br>Deep learning with weight perturbation between epochs
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/pytorch_practice_1.ipynb
 
+__Poisson Houston Floods__
+<br>Use rate of Houston floods days over last 20 years to check Poisson and time between floods.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Poisson%20Houston%20Floods.ipynb
+
 __Probability Examples__
 <br>Originally inspired by Probability, chapter 5 of Intro to Algorithms
 <br>1. Birthday paradox
