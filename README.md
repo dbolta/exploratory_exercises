@@ -44,9 +44,9 @@ __Neural nets with pytorch__
 <br>Deep learning with weight perturbation between epochs
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/pytorch_practice_1.ipynb
 
-__Poisson Houston Floods__
-<br>Use rate of Houston floods days over last 20 years to check Poisson and time between floods.
-<br>https://github.com/dbolta/exploratory_exercises/blob/master/Poisson%20Houston%20Floods.ipynb
+__Houston Floods__
+<br>Use count of Houston flood days over 20 recent years to do Poisson and Bayesian timing analysis.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/houston%20floods.ipynb
 
 __Probability Examples__
 <br>Originally inspired by Probability, chapter 5 of Intro to Algorithms
