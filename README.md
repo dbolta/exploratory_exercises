@@ -28,6 +28,10 @@ __Galveston Bay water readings around Hurricane Harvey__
 <br>Review of water sampling data and how it correlates with Hurricane Harvey.
 <br>https://github.com/dbolta/exploratory_exercises
 
+__Houston Floods__
+<br>Use count of Houston flood days over 20 recent years to do Poisson and Bayesian timing analysis.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/houston%20floods.ipynb
+
 __LSTM vs GRU in keras__
 <br>Predict sine wave using window function, then compare which RNN is more accurate.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
@@ -43,10 +47,6 @@ __Neural nets from scratch with numpy__
 __Neural nets with pytorch__
 <br>Deep learning with weight perturbation between epochs
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/pytorch_practice_1.ipynb
-
-__Houston Floods__
-<br>Use count of Houston flood days over 20 recent years to do Poisson and Bayesian timing analysis.
-<br>https://github.com/dbolta/exploratory_exercises/blob/master/houston%20floods.ipynb
 
 __Probability Examples__
 <br>Originally inspired by Probability, chapter 5 of Intro to Algorithms
