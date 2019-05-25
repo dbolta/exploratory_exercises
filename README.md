@@ -56,3 +56,7 @@ __Probability Examples__
 <br>4. Goodness of fit: chi-squared and k-s tests
 <br>5. Jeep problem
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Probability%20Examples.ipynb
+
+__Trump Fact Checking__
+<br>Poisson analysis based on Washington Post's Fact Check summary statistics.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Trump%20Fact%20Checking.ipynb
