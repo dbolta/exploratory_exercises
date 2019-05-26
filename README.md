@@ -19,7 +19,7 @@ __What does it mean to be masculine?__
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.Rmd
 
-
+<br>
 ## 2. Python
 <br>__Baby Weight Bayes__
 <br>Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
