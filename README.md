@@ -18,7 +18,7 @@ __What does it mean to be masculine?__
 <br>Analysis if Nate Silver 538.com masculinity survey data
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.Rmd
-<br>
+<br><br>
 
 ## 2. Python
 <br>__Baby Weight Bayes__
