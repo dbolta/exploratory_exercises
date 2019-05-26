@@ -1,7 +1,7 @@
-# exploratory_exercises
+# exploratory_exercises with R and Python
 A collection of exploratory data analyses
 
-## R
+## 1. R
 <br>__2016 Presidential Votes & Taxes__
 <br>An analysis of voting results in the 2016 presidential election vs. state populations, tax payments, and federal subsidies received.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/2016_presidential_votes_vs_taxes.ipynb
@@ -19,7 +19,7 @@ __What does it mean to be masculine?__
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.Rmd
 
-## Python
+## 2. Python
 <br>__Baby Weight Bayes__
 <br>Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20weight%20bayes%201.ipynb
