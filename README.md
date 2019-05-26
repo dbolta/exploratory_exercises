@@ -19,6 +19,7 @@ __What does it mean to be masculine?__
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.Rmd
 
+
 ## 2. Python
 <br>__Baby Weight Bayes__
 <br>Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
@@ -59,8 +60,8 @@ __Probability Examples__
 
 __Power of a Study with ipywidgets__
 <br>Power analysis of an improvement study. 
-1. Power given sample size.
-2. Needed sample size to reach desired power.
+<br>1. Power given sample size.
+<br>2. Needed sample size to reach desired power.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Power%20of%20Study%20ipywidget.ipynb
 
 __Trump Fact Checking__
