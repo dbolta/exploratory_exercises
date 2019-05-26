@@ -57,6 +57,12 @@ __Probability Examples__
 <br>5. Jeep problem
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Probability%20Examples.ipynb
 
+__Power of a Study with ipywidgets__
+<br>Power analysis of an improvement study. 
+1. Power given sample size.
+2. Needed sample size to reach desired power.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Power%20of%20Study%20ipywidget.ipynb
+
 __Trump Fact Checking__
 <br>Poisson analysis based on Washington Post's Fact Check summary statistics.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Trump%20Fact%20Checking.ipynb
