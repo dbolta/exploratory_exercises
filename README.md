@@ -56,6 +56,7 @@ __Probability Examples__
 <br>3. Poisson and exponential events probabilities
 <br>4. Goodness of fit: chi-squared and k-s tests
 <br>5. Jeep problem
+<br>6. Streaks: hitting slumps, NBA shooting hot streaks
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Probability%20Examples.ipynb
 
 __Power of a Study with ipywidgets__
