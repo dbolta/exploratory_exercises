@@ -42,7 +42,7 @@ __Neural nets from scratch with numpy__
 <br>1. Multilayer with relu activation
 <br>2. #1 with additional hidden layer
 <br>3. #2 with bias
-<br>4. #3 sub sigmoid activation 
+<br>4. #3 with sigmoid activation 
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/numpy_nnet_1.ipynb
 
 __Neural nets with pytorch__
