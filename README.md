@@ -27,7 +27,7 @@ __What does it mean to be masculine?__
 
 __Galveston Bay water readings around Hurricane Harvey__
 <br>Review of water sampling data and how it correlates with Hurricane Harvey.
-<br>https://github.com/dbolta/exploratory_exercises
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Galveston%20bay.ipynb
 
 __Houston Floods__
 <br>Use count of Houston flood days over 20 recent years to do Poisson and Bayesian timing analysis.
