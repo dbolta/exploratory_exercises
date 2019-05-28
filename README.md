@@ -57,7 +57,8 @@ __Probability Examples__
 <br>4. Goodness of fit: chi-squared and k-s tests
 <br>5. Jeep problem
 <br>6. Streaks: hitting slumps, NBA shooting hot streaks
-<br>https://github.com/dbolta/exploratory_exercises/blob/master/Probability%20Examples.ipynb
+<br>7. Streaks with impurity: hitting 4-out-of-5, shooting 15-out-of-20
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/probability%20examples.ipynb
 
 __Power of a Study with ipywidgets__
 <br>Power analysis of an improvement study. 
