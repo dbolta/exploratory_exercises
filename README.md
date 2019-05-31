@@ -64,6 +64,10 @@ __Probability Examples__
 <br>7. Streaks with impurity: hitting 4-out-of-5, shooting 15-out-of-20
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/probability%20examples.ipynb
 
+__Power of a Study with Bokeh__
+<br>Bokeh version of ipywidgets functionaliy 
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Is_My_Study_Under-Powered_5e_linked_tabs.py
+
 __Power of a Study with ipywidgets__
 <br>Power analysis of an improvement study. 
 <br>1. Power given sample size.
