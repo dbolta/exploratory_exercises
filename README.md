@@ -62,6 +62,8 @@ __Probability Examples__
 <br>5. Jeep problem
 <br>6. Streaks: hitting slumps, NBA shooting hot streaks
 <br>7. Streaks with impurity: hitting 4-out-of-5, shooting 15-out-of-20
+<br>8. Simulated Chinese Restaurant Process
+<br>9. Simulated Dirichlet Process
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/probability%20examples.ipynb
 
 __Power of a Study with Bokeh__
