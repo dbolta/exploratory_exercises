@@ -25,6 +25,10 @@ __What does it mean to be masculine?__
 <br>Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20weight%20bayes%201.ipynb
 
+__Cauchy Distribution__
+<br>Comparing different ways to calculate the Cauchy Distribution, visualized with Altair
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Cauchy%20Distribution.ipynb
+
 __Galveston Bay water readings around Hurricane Harvey__
 <br>Review of water sampling data and how it correlates with Hurricane Harvey.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Galveston%20bay.ipynb
