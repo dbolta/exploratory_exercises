@@ -41,6 +41,10 @@ __LSTM vs GRU in keras__
 <br>Predict sine wave using window function, then compare which RNN is more accurate.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
 
+__Monte Carlo Integration__
+<br>Use Monte Carlo and MCMC to Integrate
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Monte%20Carlo%20Integration.ipynb
+
 __Neural nets from scratch with numpy__
 <br>4 neural nets from scratch: 
 <br>1. Multilayer with relu activation
