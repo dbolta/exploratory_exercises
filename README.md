@@ -37,6 +37,10 @@ __Houston Floods__
 <br>Use count of Houston flood days over 20 recent years to do Poisson and Bayesian timing analysis.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/houston%20floods.ipynb
 
+__Infinite Resistors__
+<br>Quick little infinite sum calculation. Inspired by xkcd
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Infinite%20Resistors.ipynb
+
 __LSTM vs GRU in keras__
 <br>Predict sine wave using window function, then compare which RNN is more accurate.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/predict_sine_LSTM_vs_GRU.ipynb
