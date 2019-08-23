@@ -29,6 +29,10 @@ __Cauchy Distribution__
 <br>Comparing different ways to calculate the Cauchy Distribution, visualized with Altair
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Cauchy%20Distribution.ipynb
 
+__Euclid Greatest Common Denominator__
+<br>Implementation of the euclid method to find gcd
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Euclid%20GCD.ipynb
+
 __Galveston Bay water readings around Hurricane Harvey__
 <br>Review of water sampling data and how it correlates with Hurricane Harvey.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Galveston%20bay.ipynb
