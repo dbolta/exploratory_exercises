@@ -29,6 +29,10 @@ __Cauchy Distribution__
 <br>Comparing different ways to calculate the Cauchy Distribution, visualized with Altair
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Cauchy%20Distribution.ipynb
 
+__Continued Fractions__
+<br>Computing irrational numbers (the infinity one level above counting numbers)
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Continued%20Fractions.ipynb
+
 __Euclid Greatest Common Denominator__
 <br>Implementation of the euclid method to find gcd
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Euclid%20GCD.ipynb
