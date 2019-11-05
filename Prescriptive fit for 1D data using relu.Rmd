@@ -1,0 +1,79 @@
+
+
+```{r}
+library(tidyverse)
+
+relu = function(input) {
+  max(0, input)
+}
+```
+
+
+```{r make data}
+noise_data = tibble(x = (1:100)/10) %>% 
+  mutate(y = runif(n = nrow(.), min = -10, max = 10))
+
+noise_data
+
+```
+
+```{r make weights}
+
+ordered_data = noise_data %>% 
+  arrange(x)
+
+weights_1 = rep(1, nrow(ordered_data)) %>% as.matrix()
+
+biases_1 = -1 * ordered_data$x %>% as.matrix()
+
+weights_out = c()
+
+for (i in 2:nrow(ordered_data)) {
+  weights_out = c(weights_out,
+                  (ordered_data$y[i] - ordered_data$y[i-1])/(ordered_data$x[i] - ordered_data$x[i-1]) - sum(weights_out)
+  )  
+}
+weights_out = c(weights_out, 0)
+weights_out = weights_out %>%  matrix(nrow = 1)
+#c(c(),(ordered_data$y[2] - ordered_data$y[1])/(ordered_data$x[2] - ordered_data$x[1]), 3)
+biases_out = ordered_data$y[1]
+
+weights_1 %>% as.data.frame()
+biases_1 %>% as.data.frame()
+weights_out %>% as.data.frame()
+biases_out %>% as.data.frame()
+
+nnet_predict = function(input_x){
+  tmp_matr = weights_1 %*% input_x + biases_1 
+  tmp_matr = map_dbl(tmp_matr, relu) %>% as.matrix()
+  tmp_matr = weights_out %*% tmp_matr + biases_out
+  tmp_matr
+}
+```
+
+
+
+
+```{r}
+noise_data = noise_data %>% 
+  mutate(predictions = map_dbl(.$x,
+        nnet_predict))
+
+noise_data %>% 
+  ggplot(aes(x,y)) +
+  geom_line() +
+  geom_point(aes(x, predictions), color = "red")
+
+noise_data_hi_freq = tibble(x = seq(from = min(noise_data$x), to = max(noise_data$x),
+                                    length.out = 10*length(noise_data$x))) %>% 
+  mutate(predictions = map_dbl(.$x,
+        nnet_predict))
+# noise_data_hi_freq
+
+noise_data %>% 
+  ggplot(aes(x,y)) +
+  geom_line() +
+  geom_point(data = noise_data_hi_freq,
+            aes(x, predictions), color = "red")
+```
+
