@@ -14,6 +14,10 @@ __Hours of Work to Pay for a Hospital Visit__
 <br>Utilizing Data.World's Monday Makeover mortage and earnings data with Kaiser Family Foundation data on Medical Costs
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Hours%20to%20Pay%20Hospital%20Visit.ipynb
 
+__Prescriptive Fit Data with Relu__
+<br>Perfectly fit 1D data with single hidden layer using relu activation.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Prescriptive%20fit%20for%201D%20data%20using%20relu.Rmd
+
 __What does it mean to be masculine?__
 <br>Analysis if Nate Silver 538.com masculinity survey data
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/538_man_survey.pdf
