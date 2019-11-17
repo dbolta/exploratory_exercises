@@ -29,7 +29,7 @@ __What does it mean to be masculine?__
 <br>Calculate exact dose of acetaminophen based on baby's weight
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20tylenol%20dosing.ipynb
 
-<br>__Baby Weight Bayes__
+__Baby Weight Bayes__
 <br>Bayes and MCMC probability distribution of baby's weight via WHO growth chart (prior) and measurements at doctor (likelihood)
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/baby%20weight%20bayes%201.ipynb
 
