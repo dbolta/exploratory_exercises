@@ -6,6 +6,10 @@ A collection of exploratory data analyses
 <br>An analysis of voting results in the 2016 presidential election vs. state populations, tax payments, and federal subsidies received.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/2016_presidential_votes_vs_taxes.ipynb
 
+__Bayesian Inference Visualized__
+<br>Bayesian inference simulations and visualizations inspired by Rasmus Baath's datacamp course.
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Bayesian%20Inference%20Visualized.Rmd
+
 __Hot Ones Spice Graphs__
 <br>A trellised visualization to determine how much of a shock each proceeding sauce is for the contestant.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/hot_ones_graphs_R_kernel.ipynb
