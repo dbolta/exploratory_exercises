@@ -9,6 +9,7 @@ A collection of exploratory data analyses
 __Bayesian Inference Visualized__
 <br>Bayesian inference simulations and visualizations inspired by Rasmus Baath's datacamp course.
 <br>https://github.com/dbolta/exploratory_exercises/blob/master/Bayesian%20Inference%20Visualized.Rmd
+<br>https://github.com/dbolta/exploratory_exercises/blob/master/Bayesian%20Inference%20Visualized.ipynb
 
 __Hot Ones Spice Graphs__
 <br>A trellised visualization to determine how much of a shock each proceeding sauce is for the contestant.
